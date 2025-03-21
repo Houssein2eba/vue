@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function index(){
+        $posts = Post::all();
+        return inertia('Index',compact('posts'));
+    }
     public function create(){
         return inertia('Create');
     }
     public function store(Request $request)
     {
-        
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -21,6 +24,6 @@ class PostController extends Controller
             'title' => $request->title,
             'body' => $request->body
         ]);
-        return inertia('Index');
+        return inertia('Index' );
     }
 }
